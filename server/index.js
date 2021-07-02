@@ -7,17 +7,13 @@ const PORT = process.env.PORT || 3001
 const app = express()
 app.use(cors())
 
-// fetch('https://google.com')
-//     .then(res => res.text())
-//     .then(text => res.json({ message: 'Hello from server!' }))
-
-app.get('/results', (req, res) => {
+app.get('/results/:query', (req, res) => {
 	fetch(
-		'https://www.googleapis.com/books/v1/volumes?q=%22wool%22+inTitle&printType=books'
+		`https://www.googleapis.com/books/v1/volumes?q=${req.params.query}+inTitle&printType=books`
 	)
 		.then(res => res.json())
 		.then(data => {
-			console.log('node', req.params)
+			console.log('req.params.query')
 			res.json({ results: data })
 		})
 })
