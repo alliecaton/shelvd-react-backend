@@ -16,6 +16,9 @@ app.get('/results/:query', (req, res) => {
 			console.log('backend query', req.params.query)
 			res.json({ results: data })
 		})
+		.catch(error => {
+			console.log(error.message)
+		})
 })
 
 app.get('/books/:isbn', (req, res) => {
@@ -24,6 +27,9 @@ app.get('/books/:isbn', (req, res) => {
 		.then(data => {
 			console.log('in fetch', req.params.isbn)
 			res.json({ results: data.items })
+		})
+		.catch(error => {
+			console.log(error.message)
 		})
 })
 
